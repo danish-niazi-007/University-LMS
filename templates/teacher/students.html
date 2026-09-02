@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}
+Students
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    Students
+</h1>
+
+<h2>
+    {{ offering.course.code }} - {{ offering.course.name }}
+</h2>
+
+<p>
+    <strong>Department:</strong>
+    {{ offering.course.department.name }}
+</p>
+
+<p>
+    <strong>Semester:</strong>
+    {{ offering.course.semester }}
+</p>
+
+<p>
+    <strong>Academic Year:</strong>
+    {{ offering.academic_year }}
+</p>
+
+<hr>
+
+{% if students %}
+
+<table border="1" cellpadding="10">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Registration No</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Semester</th>
+            <th>Degree Program</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for enrollment in students %}
+
+        <tr>
+
+            <td>
+                {{ forloop.counter }}
+            </td>
+
+            <td>
+                {{ enrollment.student.registration_no }}
+            </td>
+
+            <td>
+                {{ enrollment.student.user.get_full_name|default:enrollment.student.user.username }}
+            </td>
+
+            <td>
+                {{ enrollment.student.user.username }}
+            </td>
+
+            <td>
+                {{ enrollment.student.semester }}
+            </td>
+
+            <td>
+                {{ enrollment.student.degree_program|default:"-" }}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% else %}
+
+<p>
+    No students are enrolled in this class.
+</p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'teacher_class_detail' offering.id %}">
+    ← Back to Class
+</a>
+
+<br><br>
+
+<a href="{% url 'teacher_dashboard' %}">
+    ← Back to Dashboard
+</a>
+
+{% endblock %}

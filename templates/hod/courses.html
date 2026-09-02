@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Department Courses
+{% endblock %}
+
+{% block content %}
+
+<h1>Department Courses</h1>
+
+<h2>{{ hod.department.name }}</h2>
+
+<hr>
+
+{% if courses %}
+
+    {% for course in courses %}
+
+        <div>
+            <h3>
+                {{ course.code }} - {{ course.name }}
+            </h3>
+
+            <p>
+                Semester: {{ course.semester }}
+            </p>
+
+            <p>
+                Credit Hours: {{ course.credit_hours }}
+            </p>
+
+            {% if course.description %}
+                <p>
+                    {{ course.description }}
+                </p>
+            {% endif %}
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>No courses found for this department.</p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'hod_dashboard' %}">
+    ← Back to Dashboard
+</a>
+
+{% endblock %}

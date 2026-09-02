@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}
+Assignment Submissions
+{% endblock %}
+
+{% block content %}
+
+<h1>Assignment Submissions</h1>
+
+<h2>{{ assignment.title }}</h2>
+
+<p>
+    Course:
+    {{ offering.course.code }} - {{ offering.course.name }}
+</p>
+
+<p>
+    Due Date:
+    {{ assignment.due_date }}
+</p>
+
+<hr>
+
+{% if submissions %}
+
+```
+{% for submission in submissions %}
+
+    <div>
+
+        <h3>
+            {{ submission.enrollment.student.user.get_full_name }}
+        </h3>
+
+        <p>
+            Username:
+            {{ submission.enrollment.student.user.username }}
+        </p>
+
+        <p>
+            Registration No:
+            {{ submission.enrollment.student.registration_no }}
+        </p>
+
+        <p>
+            Submitted:
+            {{ submission.submitted_at }}
+        </p>
+
+        {% if submission.submission_file %}
+
+            <a href="{% url 'download_submission' submission.id %}">
+                Download Submission
+            </a>
+
+        {% else %}
+
+            <p>No file uploaded.</p>
+
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endfor %}
+```
+
+{% else %}
+
+```
+<p>
+    No student has submitted this assignment yet.
+</p>
+```
+
+{% endif %}
+
+<a href="{% url 'teacher_assignments' offering.id %}">
+    ← Back to Assignments
+</a>
+
+{% endblock %}

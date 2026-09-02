@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+Teacher Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1>Teacher Dashboard</h1>
+
+<hr>
+
+<h2>
+    Welcome,
+    {{ request.user.get_full_name|default:request.user.username }}
+</h2>
+
+<p>
+    You are logged in as a Teacher.
+</p>
+
+<hr>
+
+<h2>Teacher Menu</h2>
+
+<div>
+
+    <a href="{% url 'teacher_classes' %}">
+        <button type="button">
+            My Classes
+        </button>
+    </a>
+
+</div>
+
+<br>
+
+<div>
+
+    <a href="#">
+        <button type="button">
+            My Assignments
+        </button>
+    </a>
+
+</div>
+
+<br>
+
+<div>
+
+    <a href="#">
+        <button type="button">
+            Attendance
+        </button>
+    </a>
+
+</div>
+
+<br>
+
+<div>
+
+    <a href="#">
+        <button type="button">
+            Marks
+        </button>
+    </a>
+
+</div>
+
+<hr>
+
+<div>
+
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,178 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Courses
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/student/student-courses.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="courses-page">
+
+    <div class="courses-header">
+
+        <div>
+            <span class="courses-eyebrow">ACADEMIC</span>
+
+            <h1>My Courses</h1>
+
+            <p>
+                View all courses you are currently enrolled in.
+            </p>
+        </div>
+
+        <div class="courses-count">
+            <span>{{ enrollments|length }}</span>
+            <small>Courses</small>
+        </div>
+
+    </div>
+
+
+    {% if enrollments %}
+
+        <div class="courses-grid">
+
+            {% for enrollment in enrollments %}
+
+                <div class="course-card">
+
+                    <div class="course-card-top">
+
+                        <div class="course-code">
+                            {{ enrollment.course_offering.course.code }}
+                        </div>
+
+                        <span class="course-status">
+                            Enrolled
+                        </span>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+                        <h2>
+                            {{ enrollment.course_offering.course.name }}
+                        </h2>
+
+                        <p class="course-description">
+                            {{ enrollment.course_offering.course.description|default:"No course description available."|truncatechars:110 }}
+                        </p>
+
+
+                        <div class="course-details">
+
+                            <div class="course-detail">
+
+                                <span class="detail-icon">🏢</span>
+
+                                <div>
+                                    <small>Department</small>
+
+                                    <strong>
+                                        {{ enrollment.course_offering.course.department.name }}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+
+                            <div class="course-detail">
+
+                                <span class="detail-icon">📚</span>
+
+                                <div>
+                                    <small>Semester</small>
+
+                                    <strong>
+                                        Semester {{ enrollment.course_offering.course.semester }}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+
+                            <div class="course-detail">
+
+                                <span class="detail-icon">👨‍🏫</span>
+
+                                <div>
+                                    <small>Teacher</small>
+
+                                    <strong>
+                                        {{ enrollment.course_offering.teacher.user.get_full_name|default:enrollment.course_offering.teacher.user.username }}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+
+                            <div class="course-detail">
+
+                                <span class="detail-icon">📅</span>
+
+                                <div>
+                                    <small>Academic Year</small>
+
+                                    <strong>
+                                        {{ enrollment.course_offering.academic_year }}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="course-card-footer">
+
+                        <span class="course-enrollment">
+                            ✓ Currently enrolled
+                        </span>
+
+                        <a
+                            href="{% url 'student_course_detail' enrollment.id %}"
+                            class="course-btn"
+                        >
+                            View Course
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-courses">
+
+            <div class="empty-icon">
+                📚
+            </div>
+
+            <h2>No Courses Yet</h2>
+
+            <p>
+                You are not enrolled in any course yet.
+                Your courses will appear here once you are enrolled.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

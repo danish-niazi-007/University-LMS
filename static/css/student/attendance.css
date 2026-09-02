@@ -1,0 +1,288 @@
+
+.attendance-page {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 24px 50px;
+    color: #172033;
+}
+
+.course-header {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    color: white;
+    padding: 38px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.18);
+}
+
+.page-label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 8px;
+}
+
+.course-header h1 {
+    margin: 0 0 10px;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.course-header h2 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.course-header p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.attendance-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.10);
+}
+
+.summary-card span {
+    display: block;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.summary-card strong {
+    display: block;
+    font-size: 30px;
+    color: #1e293b;
+}
+
+.present-card {
+    border-left: 5px solid #16a34a;
+}
+
+.present-card strong {
+    color: #16a34a;
+}
+
+.absent-card {
+    border-left: 5px solid #dc2626;
+}
+
+.absent-card strong {
+    color: #dc2626;
+}
+
+.percentage-card {
+    border-left: 5px solid #2563eb;
+}
+
+.percentage-card strong {
+    color: #2563eb;
+}
+
+.record-section {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.section-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eef2f7;
+    padding-bottom: 18px;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #172033;
+}
+
+.attendance-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.attendance-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 8px;
+    border-bottom: 1px solid #eef2f7;
+    transition: background 0.2s ease;
+}
+
+.attendance-row:last-child {
+    border-bottom: none;
+}
+
+.attendance-row:hover {
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.attendance-date {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.attendance-date strong {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 18px;
+}
+
+.attendance-date span {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.status.present {
+    color: #15803d;
+    background: #dcfce7;
+}
+
+.status.absent {
+    color: #b91c1c;
+    background: #fee2e2;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 55px 20px;
+}
+
+.empty-icon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    border-radius: 18px;
+    background: #eff6ff;
+    font-size: 28px;
+}
+
+.empty-state h3 {
+    margin: 0 0 8px;
+    color: #1e293b;
+    font-size: 20px;
+}
+
+.empty-state p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 24px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: #172033;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background: #2563eb;
+    transform: translateX(-3px);
+}
+
+@media (max-width: 900px) {
+    .attendance-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .attendance-page {
+        margin: 25px auto;
+        padding: 0 15px 35px;
+    }
+
+    .course-header {
+        padding: 25px;
+        border-radius: 16px;
+    }
+
+    .course-header h1 {
+        font-size: 27px;
+    }
+
+    .course-header h2 {
+        font-size: 17px;
+    }
+
+    .attendance-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .record-section {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .attendance-row {
+        padding: 15px 4px;
+    }
+
+    .attendance-date strong {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .status {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+}
+

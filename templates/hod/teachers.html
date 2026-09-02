@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+Department Teachers
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    Department Teachers
+</h1>
+
+<h2>
+    {{ hod.department.name }}
+</h2>
+
+<hr>
+
+{% if teachers %}
+
+    {% for teacher in teachers %}
+
+        <div>
+
+            <h3>
+                {{ teacher.user.get_full_name|default:teacher.user.username }}
+            </h3>
+
+            <p>
+                Employee ID:
+                {{ teacher.employee_id }}
+            </p>
+
+            <p>
+                Department:
+                {{ teacher.department.name }}
+            </p>
+
+            <p>
+                Designation:
+                {{ teacher.designation|default:"Not specified" }}
+            </p>
+
+            <p>
+                Email:
+                {{ teacher.user.email }}
+            </p>
+
+            <p>
+                Phone:
+                {{ teacher.phone_no|default:"Not specified" }}
+            </p>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>
+        No teachers found in this department.
+    </p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'hod_dashboard' %}">
+    ← Back to Dashboard
+</a>
+
+{% endblock %}

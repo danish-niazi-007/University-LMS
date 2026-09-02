@@ -1,0 +1,243 @@
+
+.marks-page {
+    max-width: 1050px;
+    margin: 45px auto;
+    padding: 0 22px 60px;
+}
+
+.marks-header {
+    padding: 38px;
+    margin-bottom: 28px;
+    color: white;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.18);
+}
+
+.page-label {
+    display: inline-block;
+    margin-bottom: 9px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    opacity: 0.75;
+}
+
+.marks-header h1 {
+    margin: 0 0 10px;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.marks-header h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.marks-header p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.marks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.mark-card {
+    position: relative;
+    padding: 28px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 17px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.mark-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.10);
+}
+
+.mark-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+}
+
+.mark-card span {
+    display: block;
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.mark-card strong {
+    display: block;
+    font-size: 38px;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.mark-card small {
+    display: block;
+    margin-top: 5px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.mark-card.sessional::before {
+    background: #2563eb;
+}
+
+.mark-card.sessional strong {
+    color: #2563eb;
+}
+
+.mark-card.midterm::before {
+    background: #7c3aed;
+}
+
+.mark-card.midterm strong {
+    color: #7c3aed;
+}
+
+.mark-card.final::before {
+    background: #059669;
+}
+
+.mark-card.final strong {
+    color: #059669;
+}
+
+.total-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+}
+
+.total-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #94a3b8;
+}
+
+.total-card h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.total-card > strong {
+    font-size: 42px;
+    color: #60a5fa;
+}
+
+.empty-state {
+    padding: 65px 25px;
+    margin-bottom: 30px;
+    text-align: center;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.empty-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    border-radius: 18px;
+    background: #eff6ff;
+    font-size: 30px;
+}
+
+.empty-state h2 {
+    margin: 0 0 8px;
+    color: #1e293b;
+}
+
+.empty-state p {
+    max-width: 500px;
+    margin: auto;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: #172033;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background: #2563eb;
+    transform: translateX(-3px);
+}
+
+@media (max-width: 750px) {
+    .marks-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .marks-page {
+        margin: 25px auto;
+        padding: 0 14px 40px;
+    }
+
+    .marks-header {
+        padding: 28px 22px;
+    }
+
+    .marks-header h1 {
+        font-size: 27px;
+    }
+
+    .marks-header h2 {
+        font-size: 17px;
+    }
+
+    .mark-card {
+        padding: 23px;
+    }
+
+    .total-card {
+        padding: 23px;
+    }
+
+    .total-card > strong {
+        font-size: 32px;
+    }
+}
+

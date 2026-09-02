@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}LMS{% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="/" class="brand">
+                <span class="brand-icon">L</span>
+                <span>LMS</span>
+            </a>
+
+            {% if request.user.is_authenticated %}
+
+                <div class="nav-right">
+
+                    <div class="user-info">
+                        <span class="user-name">
+                            {{ request.user.get_full_name|default:request.user.username }}
+                        </span>
+
+                        <span class="user-role">
+                            {{ request.user.role|title }}
+                        </span>
+                    </div>
+
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="logout-btn">
+                            Logout
+                        </button>
+                    </form>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+
+    <main class="main-content">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <footer class="footer">
+
+        <p>
+            © {% now "Y" %} Learning Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

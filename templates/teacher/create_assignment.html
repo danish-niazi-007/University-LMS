@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Assignment
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    Create Assignment
+</h1>
+
+<h2>
+    {{ offering.course.code }} - {{ offering.course.name }}
+</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <p>
+        <label>
+            Assignment Title
+        </label>
+    </p>
+
+    <input
+        type="text"
+        name="title"
+        required
+    >
+
+    <p>
+        <label>
+            Description
+        </label>
+    </p>
+
+    <textarea
+        name="description"
+        rows="6"
+        cols="50"
+    ></textarea>
+
+    <p>
+        <label>
+            Due Date
+        </label>
+    </p>
+
+    <input
+        type="datetime-local"
+        name="due_date"
+        required
+    >
+
+    <p>
+        <label>
+            Assignment File
+        </label>
+    </p>
+
+    <input
+        type="file"
+        name="assignment_file"
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Create Assignment
+    </button>
+
+</form>
+
+<br>
+
+<a href="{% url 'teacher_assignments' offering.id %}">
+    ← Back to Assignments
+</a>
+
+{% endblock %}

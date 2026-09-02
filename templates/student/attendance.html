@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Attendance
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/student/attendance.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="attendance-page">
+
+```
+<div class="course-header">
+    <span class="page-label">COURSE ATTENDANCE</span>
+
+    <h1>My Attendance</h1>
+
+    <h2>
+        {{ enrollment.course_offering.course.code }}
+        -
+        {{ enrollment.course_offering.course.name }}
+    </h2>
+
+    <p>
+        {{ enrollment.course_offering.course.department.name }}
+        · Semester {{ enrollment.course_offering.course.semester }}
+    </p>
+</div>
+
+
+<div class="attendance-summary">
+
+    <div class="summary-card">
+        <span>Total Classes</span>
+        <strong>{{ total_classes }}</strong>
+    </div>
+
+    <div class="summary-card present-card">
+        <span>Present</span>
+        <strong>{{ present_classes }}</strong>
+    </div>
+
+    <div class="summary-card absent-card">
+        <span>Absent</span>
+        <strong>{{ absent_classes }}</strong>
+    </div>
+
+    <div class="summary-card percentage-card">
+        <span>Attendance</span>
+        <strong>{{ attendance_percentage }}%</strong>
+    </div>
+
+</div>
+
+
+<div class="record-section">
+
+    <div class="section-header">
+        <div>
+            <span class="page-label">HISTORY</span>
+            <h3>Attendance Record</h3>
+        </div>
+    </div>
+
+    {% if records %}
+
+        <div class="attendance-list">
+
+            {% for record in records %}
+
+                <div class="attendance-row">
+
+                    <div class="attendance-date">
+                        <strong>{{ record.date|date:"d" }}</strong>
+                        <span>{{ record.date|date:"M Y" }}</span>
+                    </div>
+
+                    <div class="attendance-status">
+
+                        {% if record.present %}
+
+                            <span class="status present">
+                                ✓ Present
+                            </span>
+
+                        {% else %}
+
+                            <span class="status absent">
+                                ✕ Absent
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+            <div class="empty-icon">📋</div>
+
+            <h3>No Attendance Records</h3>
+
+            <p>
+                No attendance record is available for this course yet.
+            </p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<a
+    href="{% url 'student_course_detail' enrollment.id %}"
+    class="back-button"
+>
+    ← Back to Course
+</a>
+```
+
+</div>
+
+{% endblock %}

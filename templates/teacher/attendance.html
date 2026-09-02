@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}
+Attendance
+{% endblock %}
+
+{% block content %}
+
+<h1>Attendance</h1>
+
+<h2>
+    {{ offering.course.code }} - {{ offering.course.name }}
+</h2>
+
+<p>
+    Academic Year: {{ offering.academic_year }}
+</p>
+
+<hr>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <label>
+        Attendance Date:
+    </label>
+
+    <input
+        type="date"
+        name="date"
+        value="{{ selected_date }}"
+        required
+    >
+
+    <br><br>
+
+    {% if enrollments %}
+
+        {% for enrollment in enrollments %}
+
+            <div>
+
+                <strong>
+                    {{ enrollment.student.user.get_full_name }}
+                </strong>
+
+                -
+
+                {{ enrollment.student.registration_no }}
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="present_{{ enrollment.id }}"
+                        {% if enrollment.is_present %}
+                            checked
+                        {% endif %}
+                    >
+
+                    Present
+
+                </label>
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+        <button type="submit">
+            Save Attendance
+        </button>
+
+    {% else %}
+
+        <p>
+            No students are enrolled in this class.
+        </p>
+
+    {% endif %}
+
+</form>
+
+<br>
+
+<a href="{% url 'teacher_class_detail' offering.id %}">
+    ← Back to Class
+</a>
+
+{% endblock %}

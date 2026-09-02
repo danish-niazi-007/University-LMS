@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Submit Assignment
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/student/submit_assignment.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="submit-page">
+
+```
+<div class="submit-card">
+
+    <div class="submit-header">
+        <span class="page-label">ASSIGNMENT SUBMISSION</span>
+
+        <h1>Submit Assignment</h1>
+
+        <h2>{{ assignment.title }}</h2>
+    </div>
+
+
+    <div class="assignment-info">
+
+        {% if assignment.description %}
+            <div class="info-item">
+                <span class="info-label">Description</span>
+                <p>{{ assignment.description }}</p>
+            </div>
+        {% endif %}
+
+        <div class="info-item">
+            <span class="info-label">Due Date</span>
+            <p class="due-date">
+                {{ assignment.due_date }}
+            </p>
+        </div>
+
+    </div>
+
+
+    {% if error %}
+        <div class="error-message">
+            <span>!</span>
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+
+    <form
+        method="post"
+        enctype="multipart/form-data"
+        class="submission-form"
+    >
+
+        {% csrf_token %}
+
+        <label for="submission_file">
+            Select Your File
+        </label>
+
+        <div class="file-box">
+
+            <input
+                type="file"
+                id="submission_file"
+                name="submission_file"
+                required
+            >
+
+            <span class="file-hint">
+                Choose the file you want to submit.
+            </span>
+
+        </div>
+
+
+        <button type="submit" class="submit-button">
+            Submit Assignment
+        </button>
+
+    </form>
+
+
+    <a
+        href="{% url 'student_course_detail' enrollment.id %}"
+        class="back-button"
+    >
+        ← Back to Course
+    </a>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

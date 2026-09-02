@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+Course Offerings
+{% endblock %}
+
+{% block content %}
+
+<h1>Course Offerings</h1>
+
+<h2>{{ hod.department.name }}</h2>
+
+<hr>
+
+{% if offerings %}
+
+    {% for offering in offerings %}
+
+        <div>
+
+            <h3>
+                {{ offering.course.code }} -
+                {{ offering.course.name }}
+            </h3>
+
+            <p>
+                Semester:
+                {{ offering.course.semester }}
+            </p>
+
+            <p>
+                Teacher:
+                {{ offering.teacher.user.get_full_name|default:offering.teacher.user.username }}
+            </p>
+
+            <p>
+                Employee ID:
+                {{ offering.teacher.employee_id }}
+            </p>
+
+            <p>
+                Academic Year:
+                {{ offering.academic_year }}
+            </p>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>
+        No course offerings found.
+    </p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'hod_dashboard' %}">
+    ← Back to Dashboard
+</a>
+
+{% endblock %}

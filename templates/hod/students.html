@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+Department Students
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    Department Students
+</h1>
+
+<h2>
+    {{ hod.department.name }}
+</h2>
+
+<hr>
+
+{% if students %}
+
+    {% for student in students %}
+
+        <div>
+
+            <h3>
+                {{ student.user.get_full_name|default:student.user.username }}
+            </h3>
+
+            <p>
+                Registration No:
+                {{ student.registration_no }}
+            </p>
+
+            <p>
+                Department:
+                {{ student.department.name }}
+            </p>
+
+            <p>
+                Semester:
+                {{ student.semester|default:"Not specified" }}
+            </p>
+
+            <p>
+                Degree Program:
+                {{ student.degree_program|default:"Not specified" }}
+            </p>
+
+            <p>
+                Email:
+                {{ student.user.email }}
+            </p>
+
+            <p>
+                Phone:
+                {{ student.phone_no|default:"Not specified" }}
+            </p>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>
+        No students found in this department.
+    </p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'hod_dashboard' %}">
+    ← Back to Dashboard
+</a>
+
+{% endblock %}

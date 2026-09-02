@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Classes
+{% endblock %}
+
+{% block content %}
+
+<h1>My Classes</h1>
+
+<p>
+    These are the courses currently assigned to you.
+</p>
+
+<hr>
+
+{% if offerings %}
+
+    {% for offering in offerings %}
+
+        <div>
+
+            <h2>
+                {{ offering.course.code }}
+                -
+                {{ offering.course.name }}
+            </h2>
+
+            <p>
+                <strong>Department:</strong>
+                {{ offering.course.department.name }}
+            </p>
+
+            <p>
+                <strong>Semester:</strong>
+                {{ offering.course.semester }}
+            </p>
+
+            <p>
+                <strong>Credit Hours:</strong>
+                {{ offering.course.credit_hours }}
+            </p>
+
+            <p>
+                <strong>Academic Year:</strong>
+                {{ offering.academic_year }}
+            </p>
+
+            <br>
+
+            <a href="{% url 'teacher_class_detail' offering.id %}">
+                <button type="button">
+                    Open Class
+                </button>
+            </a>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>
+        No classes have been assigned to you yet.
+    </p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'teacher_dashboard' %}">
+    ← Back to Dashboard
+</a>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}
+HOD Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    HOD Dashboard
+</h1>
+
+<h2>
+    {{ hod.department.name }}
+</h2>
+
+<hr>
+
+<h3>
+    Department Overview
+</h3>
+
+<p>
+    Students:
+    <strong>{{ students_count }}</strong>
+</p>
+
+<p>
+    Teachers:
+    <strong>{{ teachers_count }}</strong>
+</p>
+
+<p>
+    Courses:
+    <strong>{{ courses_count }}</strong>
+</p>
+
+<p>
+    Course Offerings:
+    <strong>{{ offerings_count }}</strong>
+</p>
+
+<hr>
+
+<a href="{% url 'hod_students' %}">
+    <button type="button">
+        Students
+    </button>
+</a>
+
+<a href="{% url 'hod_teachers' %}">
+    <button type="button">
+        Teachers
+    </button>
+</a>
+
+<a href="{% url 'hod_courses' %}">
+    <button type="button">
+        Courses
+    </button>
+</a>
+
+<a href="{% url 'hod_course_offerings' %}">
+    <button type="button">
+        Course Offerings
+    </button>
+</a>
+<a href="{% url 'hod_create_course_offering' %}">
+    <button type="button">
+        Create Course Offering
+    </button>
+</a>
+
+<hr>
+
+{% endblock %}

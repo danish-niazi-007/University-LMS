@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Marks
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/student/marks.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="marks-page">
+
+```
+<div class="marks-header">
+
+    <span class="page-label">ACADEMIC PERFORMANCE</span>
+
+    <h1>My Marks</h1>
+
+    <h2>
+        {{ enrollment.course_offering.course.code }}
+        -
+        {{ enrollment.course_offering.course.name }}
+    </h2>
+
+    <p>
+        {{ enrollment.course_offering.course.department.name }}
+        · Semester {{ enrollment.course_offering.course.semester }}
+    </p>
+
+</div>
+
+
+{% if marks %}
+
+    <div class="marks-grid">
+
+        <div class="mark-card sessional">
+            <span>Sessional</span>
+            <strong>{{ marks.sessional }}</strong>
+            <small>Marks</small>
+        </div>
+
+        <div class="mark-card midterm">
+            <span>Midterm</span>
+            <strong>{{ marks.midterm }}</strong>
+            <small>Marks</small>
+        </div>
+
+        <div class="mark-card final">
+            <span>Final</span>
+            <strong>{{ marks.final }}</strong>
+            <small>Marks</small>
+        </div>
+
+    </div>
+
+
+    <div class="total-card">
+
+        <div>
+            <span class="total-label">TOTAL MARKS</span>
+            <h3>Your Overall Score</h3>
+        </div>
+
+        <strong>{{ marks.total }}</strong>
+
+    </div>
+
+
+{% else %}
+
+    <div class="empty-state">
+
+        <div class="empty-icon">
+            📝
+        </div>
+
+        <h2>Marks Not Available</h2>
+
+        <p>
+            Your marks have not been entered by the teacher yet.
+            Please check again later.
+        </p>
+
+    </div>
+
+{% endif %}
+
+
+<a
+    href="{% url 'student_course_detail' enrollment.id %}"
+    class="back-button"
+>
+    ← Back to Course
+</a>
+```
+
+</div>
+
+{% endblock %}
