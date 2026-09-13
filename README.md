@@ -28,6 +28,7 @@ Students, teachers, and the HOD each get their own dashboard, backed by one shar
 - [Data Model](#data-model)
 - [How a Request Flows Through the App](#how-a-request-flows-through-the-app)
 - [Example Flow: Submitting and Grading an Assignment](#example-flow-submitting-and-grading-an-assignment)
+- [System Architecture & Diagrams](#-system-architecture--diagrams)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Environment Variables](#environment-variables)
@@ -227,6 +228,57 @@ sequenceDiagram
 ```
 
 The `unique_assignment_submission` constraint on the `Submission` model means a student can only submit once per assignment — resubmitting would need the existing row updated, not a new one created.
+
+## 📊 System Architecture & Diagrams
+
+<div align="center">
+
+A visual overview of the LMS architecture, database relationships, and user workflows.
+
+<table>
+<tr>
+<td width="50%" align="center">
+
+**🧭 User Roles & Dashboard Flow**
+
+<img src="docs/user_flow.jpg" alt="User Flow" width="100%">
+
+How Student, Teacher, and HOD each reach their own dashboard based on `User.role`.
+
+</td>
+<td width="50%" align="center">
+
+**🗂️ Entity-Relationship Diagram**
+
+<img src="docs/er_diagram.jpg" alt="ER Diagram" width="100%">
+
+How Departments, Users, Courses, Enrollments, and Assignments relate to each other.
+
+</td>
+</tr>
+<tr>
+<td width="50%" align="center">
+
+**🔐 Login Authentication Sequence**
+
+<img src="docs/login_sequence.jpg" alt="Login Sequence" width="100%">
+
+How the system authenticates a user and redirects them to the correct role-based dashboard.
+
+</td>
+<td width="50%" align="center">
+
+**📝 Assignment Workflow**
+
+<img src="docs/assignment_workflow.jpg" alt="Assignment Workflow" width="100%">
+
+How a teacher posts an assignment and a student submits their work against it.
+
+</td>
+</tr>
+</table>
+
+</div>
 
 ## Project Structure
 
