@@ -241,7 +241,7 @@ A visual overview of the LMS architecture, database relationships, and user work
 
 **🧭 User Roles & Dashboard Flow**
 
-<img src="docs/user_flow.jpg" alt="User Flow" width="100%">
+<img src="docs/user-flow.jpg" alt="User Flow" width="100%">
 
 How Student, Teacher, and HOD each reach their own dashboard based on `User.role`.
 
