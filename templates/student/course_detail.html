@@ -5,18 +5,15 @@
 {{ course_offering.course.code }} - {{ course_offering.course.name }}
 {% endblock %}
 
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/student/course_detail.css' %}"> {% endblock %}
+
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/student/course_detail.css' %}">
-
 <div class="course-detail-page">
-
-```
-<!-- Course Header -->
 <div class="course-header">
-
     <div class="course-header-content">
-
         <span class="course-code">
             {{ course_offering.course.code }}
         </span>
@@ -28,17 +25,13 @@
         <p class="course-description">
             {{ course_offering.course.description|default:"No course description available." }}
         </p>
-
     </div>
 
     <div class="course-icon">
         📚
     </div>
-
 </div>
 
-
-<!-- Course Information -->
 <div class="info-card">
 
     <h2>Course Information</h2>
@@ -84,32 +77,32 @@
 
 </div>
 
-
-<!-- Quick Actions -->
 <div class="quick-actions">
 
     <a href="{% url 'student_attendance' enrollment.id %}" class="action-card">
-        <span class="action-icon attendance-icon">📊</span>
-        <span>
+        <span class="action-icon">📊</span>
+
+        <span class="action-content">
             <strong>Attendance</strong>
             <small>View your attendance</small>
         </span>
+
         <span class="arrow">→</span>
     </a>
 
     <a href="{% url 'student_marks' enrollment.id %}" class="action-card">
-        <span class="action-icon marks-icon">📝</span>
-        <span>
+        <span class="action-icon">📝</span>
+
+        <span class="action-content">
             <strong>Marks</strong>
             <small>View your marks</small>
         </span>
+
         <span class="arrow">→</span>
     </a>
 
 </div>
 
-
-<!-- Assignments -->
 <div class="assignments-section">
 
     <div class="section-header">
@@ -123,124 +116,101 @@
         </span>
     </div>
 
-
     {% if assignments %}
 
-        <div class="assignments-list">
+    <div class="assignments-list">
 
-            {% for assignment in assignments %}
+        {% for assignment in assignments %}
 
-                <div class="assignment-card">
+        <div class="assignment-card">
 
-                    <div class="assignment-header">
+            <div class="assignment-header">
+                <div>
+                    <h3>
+                        {{ assignment.title }}
+                    </h3>
 
-                        <div>
-                            <h3>
-                                {{ assignment.title }}
-                            </h3>
+                    <span class="due-date">
+                        Due: {{ assignment.due_date }}
+                    </span>
+                </div>
 
-                            <span class="due-date">
-                                Due: {{ assignment.due_date }}
-                            </span>
-                        </div>
+                {% if assignment.my_submission %}
+                <span class="status submitted">
+                    ✓ Submitted
+                </span>
+                {% else %}
+                <span class="status not-submitted">
+                    Not Submitted
+                </span>
+                {% endif %}
+            </div>
 
-                        {% if assignment.my_submission %}
-                            <span class="status submitted">
-                                ✓ Submitted
-                            </span>
-                        {% else %}
-                            <span class="status not-submitted">
-                                Not Submitted
-                            </span>
-                        {% endif %}
+            {% if assignment.description %}
+            <p class="assignment-description">
+                {{ assignment.description }}
+            </p>
+            {% endif %}
 
-                    </div>
+            <div class="assignment-actions">
 
+                {% if assignment.assignment_file %}
+                <a href="{{ assignment.assignment_file.url }}" class="secondary-btn">
+                    ↓ Download Assignment
+                </a>
+                {% endif %}
 
-                    {% if assignment.description %}
-                        <p class="assignment-description">
-                            {{ assignment.description }}
-                        </p>
+                {% if assignment.my_submission %}
+
+                <div class="submission-info">
+
+                    <span>
+                        Submitted: {{ assignment.my_submission.submitted_at }}
+                    </span>
+
+                    {% if assignment.my_submission.submission_file %}
+                    <a href="{{ assignment.my_submission.submission_file.url }}" class="secondary-btn">
+                        View Submitted File
+                    </a>
                     {% endif %}
-
-
-                    <div class="assignment-actions">
-
-                        {% if assignment.assignment_file %}
-                            <a
-                                href="{{ assignment.assignment_file.url }}"
-                                class="secondary-btn"
-                            >
-                                ↓ Download Assignment
-                            </a>
-                        {% endif %}
-
-
-                        {% if assignment.my_submission %}
-
-                            <div class="submission-info">
-
-                                <span>
-                                    Submitted:
-                                    {{ assignment.my_submission.submitted_at }}
-                                </span>
-
-                                {% if assignment.my_submission.submission_file %}
-                                    <a
-                                        href="{{ assignment.my_submission.submission_file.url }}"
-                                        class="secondary-btn"
-                                    >
-                                        View Submitted File
-                                    </a>
-                                {% endif %}
-
-                            </div>
-
-                        {% else %}
-
-                            <a
-                                href="{% url 'submit_assignment' enrollment.id assignment.id %}"
-                                class="primary-btn"
-                            >
-                                Submit Assignment →
-                            </a>
-
-                        {% endif %}
-
-                    </div>
 
                 </div>
 
-            {% endfor %}
+                {% else %}
+
+                <a href="{% url 'submit_assignment' enrollment.id assignment.id %}" class="primary-btn">
+                    Submit Assignment →
+                </a>
+
+                {% endif %}
+
+            </div>
 
         </div>
+
+        {% endfor %}
+
+    </div>
 
     {% else %}
 
-        <div class="empty-state">
+    <div class="empty-state">
+        <div class="empty-icon">📂</div>
 
-            <div class="empty-icon">
-                📂
-            </div>
+        <h3>No Assignments</h3>
 
-            <h3>No Assignments</h3>
-
-            <p>
-                There are currently no assignments available for this course.
-            </p>
-
-        </div>
+        <p>
+            There are currently no assignments available for this course.
+        </p>
+    </div>
 
     {% endif %}
 
 </div>
 
-
-
 <a href="{% url 'student_courses' %}" class="back-link">
     ← Back to My Courses
 </a>
-```
 
 </div>
 

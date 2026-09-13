@@ -7,14 +7,11 @@ Submit Assignment
 
 {% block extra_css %}
 
-<link rel="stylesheet" href="{% static 'css/student/submit_assignment.css' %}">
-{% endblock %}
+<link rel="stylesheet" href="{% static 'css/student/submit_assignment.css' %}"> {% endblock %}
 
 {% block content %}
 
 <div class="submit-page">
-
-```
 <div class="submit-card">
 
     <div class="submit-header">
@@ -25,14 +22,13 @@ Submit Assignment
         <h2>{{ assignment.title }}</h2>
     </div>
 
-
     <div class="assignment-info">
 
         {% if assignment.description %}
-            <div class="info-item">
-                <span class="info-label">Description</span>
-                <p>{{ assignment.description }}</p>
-            </div>
+        <div class="info-item">
+            <span class="info-label">Description</span>
+            <p>{{ assignment.description }}</p>
+        </div>
         {% endif %}
 
         <div class="info-item">
@@ -44,20 +40,14 @@ Submit Assignment
 
     </div>
 
-
     {% if error %}
-        <div class="error-message">
-            <span>!</span>
-            <p>{{ error }}</p>
-        </div>
+    <div class="error-message">
+        <span>!</span>
+        <p>{{ error }}</p>
+    </div>
     {% endif %}
 
-
-    <form
-        method="post"
-        enctype="multipart/form-data"
-        class="submission-form"
-    >
+    <form method="post" enctype="multipart/form-data" class="submission-form">
 
         {% csrf_token %}
 
@@ -66,7 +56,6 @@ Submit Assignment
         </label>
 
         <div class="file-box">
-
             <input
                 type="file"
                 id="submission_file"
@@ -77,9 +66,7 @@ Submit Assignment
             <span class="file-hint">
                 Choose the file you want to submit.
             </span>
-
         </div>
-
 
         <button type="submit" class="submit-button">
             Submit Assignment
@@ -87,16 +74,11 @@ Submit Assignment
 
     </form>
 
-
-    <a
-        href="{% url 'student_course_detail' enrollment.id %}"
-        class="back-button"
-    >
+    <a href="{% url 'student_course_detail' enrollment.id %}" class="back-button">
         ← Back to Course
     </a>
 
 </div>
-```
 
 </div>
 

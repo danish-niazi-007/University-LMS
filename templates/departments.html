@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Departments — University of Mianwali</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#191510; --wheat:#F4EEDF; --wheat-dim:#EAE1CB;
+    --night:#161B2E; --night-2:#1F2740;
+    --gold:#C89A2E; --gold-bright:#E3B948; --teal:#2B6E62;
+    --line:rgba(25,21,16,0.12); --line-lt:rgba(244,238,223,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Work Sans', sans-serif; color:var(--ink); background:var(--wheat); -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; line-height:1.1;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1200px; margin:0 auto; padding:0 40px;}
+  @media (max-width:720px){ .wrap{padding:0 22px;} }
+
+  header.site-nav{
+    background:var(--wheat); border-bottom:1px solid var(--line);
+    padding:18px 0; position:sticky; top:0; z-index:50;
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{
+    width:38px; height:38px; border-radius:50%;
+    background:conic-gradient(from 200deg, var(--gold), var(--teal), var(--gold));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:700; color:var(--night); font-size:14px; flex:none;
+  }
+  .brand-text .full{font-family:'Fraunces', serif; font-weight:600; font-size:16px;}
+  .brand-text .sub{font-size:10px; letter-spacing:.06em; color:rgba(25,21,16,0.5);}
+  .back-link{font-size:14px; color:rgba(25,21,16,0.6); display:flex; align-items:center; gap:8px;}
+  .back-link:hover{color:var(--teal);}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border-radius:3px; font-size:14px; font-weight:600;}
+  .btn-gold{background:var(--gold-bright); color:#241a05;}
+  .btn-gold:hover{background:#f0c860;}
+.page-intro{padding:70px 0 50px;}
+  .page-intro .kicker{color:var(--teal); font-size:14px; font-weight:600; margin-bottom:14px;}
+  .page-intro h1{font-size:clamp(34px,5vw,54px); max-width:700px;}
+  .page-intro p{max-width:560px; color:rgba(25,21,16,0.62); line-height:1.65; font-size:16px; margin-top:18px;}
+.jump-nav{
+    display:flex; gap:10px; flex-wrap:wrap; padding-bottom:50px;
+    border-bottom:1px solid var(--line);
+  }
+  .jump-nav a{
+    padding:9px 16px; border:1px solid rgba(25,21,16,0.2); border-radius:30px; font-size:13.5px;
+  }
+  .jump-nav a:hover{border-color:var(--teal); color:var(--teal);}
+.dept-block{padding:90px 0; border-bottom:1px solid var(--line);}
+  .dept-block:nth-child(even){background:#fff;}
+  .dept-inner{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
+  .dept-inner.reverse{direction:rtl;}
+  .dept-inner.reverse > *{direction:ltr;}
+  @media (max-width:880px){
+    .dept-inner, .dept-inner.reverse{grid-template-columns:1fr; direction:ltr;}
+  }
+  .dept-photo{
+    aspect-ratio:4/3; border-radius:6px; overflow:hidden; position:relative;
+    box-shadow:0 20px 50px rgba(22,27,46,0.15);
+  }
+  .dept-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .dept-photo .idx-badge{
+    position:absolute; top:16px; left:16px; background:rgba(22,27,46,0.75); color:var(--wheat);
+    font-family:'Fraunces',serif; font-size:13px; padding:6px 13px; border-radius:20px; backdrop-filter:blur(3px);
+  }
+  .dept-copy .kicker{color:var(--teal); font-size:13px; font-weight:600; margin-bottom:12px;}
+  .dept-copy h2{font-size:clamp(26px,3vw,36px); margin-bottom:16px;}
+  .dept-copy p{color:rgba(25,21,16,0.68); line-height:1.75; font-size:15.5px; margin-bottom:16px;}
+  .dept-facts{display:flex; gap:32px; margin-top:24px; flex-wrap:wrap;}
+  .dept-facts div .num{font-family:'Fraunces',serif; font-size:24px; color:var(--teal);}
+  .dept-facts div .label{font-size:12.5px; color:rgba(25,21,16,0.55); margin-top:2px;}
+
+  footer{background:#100D08; color:rgba(244,238,223,0.7); padding:50px 0 26px; text-align:center;}
+  footer p{font-size:13px;}
+  footer a{color:var(--gold-bright);}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-row">
+    <a href="{% url 'home' %}" class="brand">
+      <div class="brand-mark">UM</div>
+      <div class="brand-text">
+        <div class="full">University of Mianwali</div>
+        <div class="sub">EST. 2013 · PUNJAB, PAKISTAN</div>
+      </div>
+    </a>
+    <a href="{% url 'home' %}">← Back to homepage</a>
+    <a href="{% url 'login' %}" >Student Login</a>
+  </div>
+</header>
+
+<section class="page-intro">
+  <div class="wrap">
+    <div class="kicker">ACADEMIC DEPARTMENTS</div>
+    <h1>Six departments. Six ways to specialize.</h1>
+    <p>Every department runs its own labs, faculty, and curriculum — but all of them
+      report to the same standard for teaching quality and graduate outcomes.</p>
+  </div>
+</section>
+
+<nav class="jump-nav wrap">
+  <a href="#cs">Computer Science &amp; IT</a>
+  <a href="#ee">Electrical Engineering</a>
+  <a href="#biz">Business &amp; Management</a>
+  <a href="#ce">Civil Engineering</a>
+  <a href="#hum">English &amp; Humanities</a>
+  <a href="#math">Mathematics &amp; Sciences</a>
+</nav>
+
+<section class="dept-block" id="cs">
+  <div class="wrap dept-inner">
+    <div class="dept-photo">
+      <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80" alt="Students working at computers in a lab">
+      <div class="idx-badge">01 / 06</div>
+    </div>
+    <div class="dept-copy">
+      <div class="kicker">DEPARTMENT OF</div>
+      <h2>Computer Science &amp; IT</h2>
+      <p>The largest department on campus, covering software engineering, AI/ML, and
+        computer networks. Final-year students build real systems — including the
+        university's own learning portal — rather than working from toy assignments.</p>
+      <p>The department runs a dedicated systems lab with GPU workstations, and its
+        faculty publish actively in machine learning and distributed systems.</p>
+      <div class="dept-facts">
+        <div><div class="num">4</div><div class="label">Degree programs</div></div>
+        <div><div class="num">32</div><div class="label">Faculty members</div></div>
+        <div><div class="num">3</div><div class="label">Dedicated labs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dept-block" id="ee">
+  <div class="wrap dept-inner reverse">
+    <div class="dept-photo">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80" alt="Electrical engineering equipment and circuit boards">
+      <div class="idx-badge">02 / 06</div>
+    </div>
+    <div class="dept-copy">
+      <div class="kicker">DEPARTMENT OF</div>
+      <h2>Electrical Engineering</h2>
+      <p>Focused on power systems and electronics, with coursework shaped around the
+        region's own grid and renewable-energy needs rather than generic textbook cases.</p>
+      <p>Students get hands-on lab time from second year onward, working with real
+        power electronics and control systems equipment.</p>
+      <div class="dept-facts">
+        <div><div class="num">3</div><div class="label">Degree programs</div></div>
+        <div><div class="num">24</div><div class="label">Faculty members</div></div>
+        <div><div class="num">2</div><div class="label">Dedicated labs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dept-block" id="biz">
+  <div class="wrap dept-inner">
+    <div class="dept-photo">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Business students in a discussion around a table">
+      <div class="idx-badge">03 / 06</div>
+    </div>
+    <div class="dept-copy">
+      <div class="kicker">DEPARTMENT OF</div>
+      <h2>Business &amp; Management</h2>
+      <p>Covers accounting, finance, and entrepreneurship, taught through case studies
+        drawn from actual businesses in Mianwali and the wider Punjab region.</p>
+      <p>The department runs a student-led business incubator, giving BBA and MBA
+        students a place to test real ideas before graduating.</p>
+      <div class="dept-facts">
+        <div><div class="num">3</div><div class="label">Degree programs</div></div>
+        <div><div class="num">19</div><div class="label">Faculty members</div></div>
+        <div><div class="num">1</div><div class="label">Business incubator</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dept-block" id="ce">
+  <div class="wrap dept-inner reverse">
+    <div class="dept-photo">
+      <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=900&q=80" alt="Civil engineering construction and structural work">
+      <div class="idx-badge">04 / 06</div>
+    </div>
+    <div class="dept-copy">
+      <div class="kicker">DEPARTMENT OF</div>
+      <h2>Civil Engineering</h2>
+      <p>Trains students in structures and water resource management — directly
+        relevant to a district shaped by the Indus river and the Thal canal system.</p>
+      <p>Field visits to local irrigation and construction sites are built into the
+        curriculum starting in the third year.</p>
+      <div class="dept-facts">
+        <div><div class="num">2</div><div class="label">Degree programs</div></div>
+        <div><div class="num">17</div><div class="label">Faculty members</div></div>
+        <div><div class="num">1</div><div class="label">Materials testing lab</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dept-block" id="hum">
+  <div class="wrap dept-inner">
+    <div class="dept-photo">
+      <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=900&q=80" alt="Students reading and studying in a library">
+      <div class="idx-badge">05 / 06</div>
+    </div>
+    <div class="dept-copy">
+      <div class="kicker">DEPARTMENT OF</div>
+      <h2>English &amp; Humanities</h2>
+      <p>Teaches the language, literature, and communication skills that carry across
+        every other degree on campus — every student takes at least two courses here.</p>
+      <p>The department also runs the university's debating society and its student
+        publication.</p>
+      <div class="dept-facts">
+        <div><div class="num">2</div><div class="label">Degree programs</div></div>
+        <div><div class="num">14</div><div class="label">Faculty members</div></div>
+        <div><div class="num">1</div><div class="label">Student publication</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dept-block" id="math">
+  <div class="wrap dept-inner reverse">
+    <div class="dept-photo">
+      <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=80" alt="Mathematics equations on a chalkboard">
+      <div class="idx-badge">06 / 06</div>
+    </div>
+    <div class="dept-copy">
+      <div class="kicker">DEPARTMENT OF</div>
+      <h2>Mathematics &amp; Sciences</h2>
+      <p>The foundational department every engineering and CS student passes through
+        in year one — calculus, linear algebra, and applied statistics.</p>
+      <p>Also home to the university's smaller physics and chemistry teaching labs,
+        shared across science-adjacent programs.</p>
+      <div class="dept-facts">
+        <div><div class="num">1</div><div class="label">Degree program</div></div>
+        <div><div class="num">21</div><div class="label">Faculty members</div></div>
+        <div><div class="num">2</div><div class="label">Teaching labs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 University of Mianwali · <a href="index.html">Back to homepage</a> · <a href="login.html">Student login</a></p>
+</footer>
+
+</body>
+</html>

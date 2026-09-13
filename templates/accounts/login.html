@@ -1,24 +1,196 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>LMS Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LMS Login | University of Mianwali</title>
+
+    <link rel="stylesheet" href="{% static 'css/login/login.css' %}">
 </head>
 
 <body>
 
-    <h1>LMS Login</h1>
+    <main class="login-page">
 
-    <form method="post" action="{% url 'login' %}">
+        <div class="login-container">
 
-        {% csrf_token %}
+            
+            <section class="login-brand">
 
-        {{ form.as_p }}
+                <div class="brand-content">
 
-        <button type="submit">
-            Login
-        </button>
+                    <div class="university-logo">
+                        <span>U</span>
+                    </div>
 
-    </form>
+                    <p class="brand-label">
+                        UNIVERSITY OF MIANWALI
+                    </p>
+
+                    <h1>
+                        Learning Management
+                        <span>System</span>
+                    </h1>
+
+                    <p class="brand-description">
+                        Access your courses, academic resources,
+                        assignments and university learning portal
+                        from one secure place.
+                    </p>
+
+                    <div class="brand-features">
+
+                        <div class="feature">
+                            <span class="feature-icon">📚</span>
+                            <div>
+                                <strong>Courses</strong>
+                                <small>Manage your enrolled courses</small>
+                            </div>
+                        </div>
+
+                        <div class="feature">
+                            <span class="feature-icon">📝</span>
+                            <div>
+                                <strong>Assignments</strong>
+                                <small>Submit and track your work</small>
+                            </div>
+                        </div>
+
+                        <div class="feature">
+                            <span class="feature-icon">📊</span>
+                            <div>
+                                <strong>Academic Progress</strong>
+                                <small>Keep track of your performance</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="brand-footer">
+                    <span>University of Mianwali</span>
+                    <span>•</span>
+                    <span>Student Portal</span>
+                </div>
+
+            </section>
+
+
+            <section class="login-form-section">
+
+                <div class="login-form-container">
+
+                    <div class="mobile-logo">
+                        <div class="university-logo">
+                            <span>U</span>
+                        </div>
+
+                        <div>
+                            <strong>University of Mianwali</strong>
+                            <small>LMS Portal</small>
+                        </div>
+                    </div>
+
+
+                    <div class="login-heading">
+
+                        <span class="login-eyebrow">
+                            STUDENT PORTAL
+                        </span>
+
+                        <h2>
+                            Welcome back
+                        </h2>
+
+                        <p>
+                            Sign in to continue to your LMS account.
+                        </p>
+
+                    </div>
+
+
+                    {% if form.non_field_errors %}
+                        <div class="form-error">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+
+                    <form method="post" action="{% url 'login' %}" class="login-form">
+
+                        {% csrf_token %}
+
+
+                        {% for field in form %}
+
+                            <div class="form-group">
+
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                </label>
+
+                                {{ field }}
+
+                                {% if field.errors %}
+                                    <div class="field-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        {% endfor %}
+
+
+                        <div class="form-options">
+
+                            <label class="remember-me">
+                                <input type="checkbox" name="remember_me">
+                                <span>Remember me</span>
+                            </label>
+
+                            {% if password_reset_url %}
+                                <a href="{{ password_reset_url }}">
+                                    Forgot password?
+                                </a>
+                            {% endif %}
+
+                        </div>
+
+
+                        <button type="submit" class="login-button">
+                            <span>Sign In</span>
+                            <span class="button-arrow">→</span>
+                        </button>
+
+                    </form>
+
+
+                    <div class="login-security">
+                        <span class="security-icon">🔒</span>
+
+                        <p>
+                            Your login information is securely protected.
+                        </p>
+                    </div>
+
+
+                    <p class="login-footer">
+                        © {% now "Y" %} University of Mianwali.
+                        All rights reserved.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
 
 </body>
 </html>

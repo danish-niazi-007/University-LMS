@@ -65,6 +65,14 @@ def hod_dashboard(request):
         department=hod.department
     ).count()
 
+    courses_count = Course.objects.filter(
+        department=hod.department
+    ).count()
+
+    offerings_count = CourseOffering.objects.filter(
+        course__department=hod.department
+    ).count()
+
     return render(
         request,
         "hod/dashboard.html",
@@ -72,6 +80,8 @@ def hod_dashboard(request):
             "hod": hod,
             "students_count": students_count,
             "teachers_count": teachers_count,
+            "courses_count": courses_count,
+            "offerings_count": offerings_count,
         },
     )
 

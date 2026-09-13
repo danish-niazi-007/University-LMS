@@ -7,22 +7,18 @@ Attendance
 
 {% block extra_css %}
 
-<link rel="stylesheet" href="{% static 'css/student/attendance.css' %}">
-{% endblock %}
+<link rel="stylesheet" href="{% static 'css/student/attendance.css' %}"> {% endblock %}
 
 {% block content %}
 
 <div class="attendance-page">
-
-```
 <div class="course-header">
     <span class="page-label">COURSE ATTENDANCE</span>
 
     <h1>My Attendance</h1>
 
     <h2>
-        {{ enrollment.course_offering.course.code }}
-        -
+        {{ enrollment.course_offering.course.code }} -
         {{ enrollment.course_offering.course.name }}
     </h2>
 
@@ -31,7 +27,6 @@ Attendance
         · Semester {{ enrollment.course_offering.course.semester }}
     </p>
 </div>
-
 
 <div class="attendance-summary">
 
@@ -57,77 +52,65 @@ Attendance
 
 </div>
 
-
 <div class="record-section">
 
     <div class="section-header">
-        <div>
-            <span class="page-label">HISTORY</span>
-            <h3>Attendance Record</h3>
-        </div>
+        <span class="page-label">HISTORY</span>
+        <h3>Attendance Record</h3>
     </div>
 
     {% if records %}
 
-        <div class="attendance-list">
+    <div class="attendance-list">
 
-            {% for record in records %}
+        {% for record in records %}
 
-                <div class="attendance-row">
+        <div class="attendance-row">
 
-                    <div class="attendance-date">
-                        <strong>{{ record.date|date:"d" }}</strong>
-                        <span>{{ record.date|date:"M Y" }}</span>
-                    </div>
+            <div class="attendance-date">
+                <strong>{{ record.date|date:"d" }}</strong>
+                <span>{{ record.date|date:"M Y" }}</span>
+            </div>
 
-                    <div class="attendance-status">
+            <div class="attendance-status">
 
-                        {% if record.present %}
+                {% if record.present %}
+                <span class="status present">
+                    ✓ Present
+                </span>
+                {% else %}
+                <span class="status absent">
+                    ✕ Absent
+                </span>
+                {% endif %}
 
-                            <span class="status present">
-                                ✓ Present
-                            </span>
-
-                        {% else %}
-
-                            <span class="status absent">
-                                ✕ Absent
-                            </span>
-
-                        {% endif %}
-
-                    </div>
-
-                </div>
-
-            {% endfor %}
+            </div>
 
         </div>
+
+        {% endfor %}
+
+    </div>
 
     {% else %}
 
-        <div class="empty-state">
-            <div class="empty-icon">📋</div>
+    <div class="empty-state">
+        <div class="empty-icon">📋</div>
 
-            <h3>No Attendance Records</h3>
+        <h3>No Attendance Records</h3>
 
-            <p>
-                No attendance record is available for this course yet.
-            </p>
-        </div>
+        <p>
+            No attendance record is available for this course yet.
+        </p>
+    </div>
 
     {% endif %}
 
 </div>
 
-
-<a
-    href="{% url 'student_course_detail' enrollment.id %}"
-    class="back-button"
->
+<a href="{% url 'student_course_detail' enrollment.id %}" class="back-button">
     ← Back to Course
 </a>
-```
 
 </div>
 

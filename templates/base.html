@@ -1,82 +1,61 @@
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<head>
-    <meta charset="UTF-8">
+<title>
+    {% block title %}LMS{% endblock %}
+</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+      href="{% static 'css/style.css' %}">
+      {% block extra_css %}{% endblock %}
 
-    <title>
-        {% block title %}LMS{% endblock %}
-    </title>
+</head> <body>
 
-    <link rel="stylesheet"
-          href="{% static 'css/style.css' %}">
+<header class="header">
 
-    {% block extra_css %}{% endblock %}
-</head>
+    <div class="header-container">
 
-<body>
+        <a href="/" class="project-name">
+            Learning Management System
+        </a>
 
-    <nav class="navbar">
+        {% if request.user.is_authenticated %}
 
-        <div class="nav-container">
+            <form method="post" action="{% url 'logout' %}">
 
-            <a href="/" class="brand">
-                <span class="brand-icon">L</span>
-                <span>LMS</span>
-            </a>
+                {% csrf_token %}
 
-            {% if request.user.is_authenticated %}
+                <button type="submit" class="logout-btn">
+                    Logout
+                </button>
 
-                <div class="nav-right">
+            </form>
 
-                    <div class="user-info">
-                        <span class="user-name">
-                            {{ request.user.get_full_name|default:request.user.username }}
-                        </span>
+        {% endif %}
 
-                        <span class="user-role">
-                            {{ request.user.role|title }}
-                        </span>
-                    </div>
+    </div>
 
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-
-                        <button type="submit" class="logout-btn">
-                            Logout
-                        </button>
-                    </form>
-
-                </div>
-
-            {% endif %}
-
-        </div>
-
-    </nav>
+</header>
 
 
-    <main class="main-content">
+<main class="main-content">
 
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
 
-    </main>
+</main>
 
 
-    <footer class="footer">
 
-        <p>
-            © {% now "Y" %} Learning Management System
-        </p>
+<footer class="footer">
 
-    </footer>
+    <p>
+        © {% now "Y" %} Learning Management System
+    </p>
 
-</body>
+</footer>
 
-</html>
+</body> </html>

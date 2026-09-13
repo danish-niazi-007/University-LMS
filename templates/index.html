@@ -1,0 +1,748 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University of Mianwali</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#191510;
+    --wheat:#F4EEDF;
+    --wheat-dim:#EAE1CB;
+    --night:#161B2E;
+    --night-2:#1F2740;
+    --gold:#C89A2E;
+    --gold-bright:#E3B948;
+    --teal:#2B6E62;
+    --teal-dim:#split;
+    --line:rgba(22,27,46,0.12);
+    --line-lt:rgba(244,238,223,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--wheat);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1200px; margin:0 auto; padding:0 40px;}
+  @media (max-width:720px){ .wrap{padding:0 22px;} }
+
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:22px 0;
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease;
+  }
+  header.site-nav.scrolled{
+    background:var(--wheat);
+    padding:14px 0;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{
+    width:40px; height:40px; border-radius:50%;
+    background:conic-gradient(from 200deg, var(--gold), var(--teal), var(--gold));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:700; color:var(--night); font-size:15px;
+    flex:none;
+  }
+  .brand-text{line-height:1.15;}
+  .brand-text .full{
+    font-family:'Fraunces', serif; font-weight:600; font-size:17px;
+    color:var(--wheat);
+    transition:color .4s ease;
+  }
+  header.site-nav.scrolled .brand-text .full{ color:var(--ink); }
+  .brand-text .sub{font-size:10.5px; letter-spacing:.06em; color:rgba(244,238,223,0.65);}
+  header.site-nav.scrolled .brand-text .sub{color:rgba(25,21,16,0.55);}
+
+  nav.links{display:flex; align-items:center; gap:34px;}
+  nav.links a{
+    font-size:14.5px; color:rgba(244,238,223,0.82); position:relative;
+    padding:4px 0; transition:color .3s ease;
+  }
+  header.site-nav.scrolled nav.links a{color:rgba(25,21,16,0.72);}
+  nav.links a:hover{color:var(--gold-bright);}
+  header.site-nav.scrolled nav.links a:hover{color:var(--teal);}
+
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 22px; border-radius:3px; font-size:14px; font-weight:600;
+    border:1px solid transparent; cursor:pointer; white-space:nowrap;
+  }
+  .btn-gold{background:var(--gold-bright); color:#241a05;}
+  .btn-gold:hover{background:#f0c860;}
+  .btn-outline-dark{border-color:rgba(244,238,223,0.4); color:var(--wheat);}
+  .btn-outline-dark:hover{border-color:var(--wheat); background:rgba(244,238,223,0.08);}
+  header.site-nav.scrolled .btn-outline-dark{border-color:rgba(25,21,16,0.3); color:var(--ink);}
+  header.site-nav.scrolled .btn-outline-dark:hover{border-color:var(--ink); background:rgba(25,21,16,0.06);}
+  .menu-toggle{display:none; background:none; border:none; color:var(--wheat); font-size:26px; cursor:pointer;}
+  header.site-nav.scrolled .menu-toggle{color:var(--ink);}
+
+  @media (max-width:900px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+  }
+
+  .hero{
+    position:relative; min-height:100vh;
+    display:flex; align-items:flex-end;
+    overflow:hidden;
+    background:var(--night);
+  }
+  .hero video, .hero .fallback-bg{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+  .fallback-bg{
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 15%, rgba(200,154,46,0.35), transparent 60%),
+      linear-gradient(200deg, #1B2138 0%, #161B2E 45%, #10130F 100%);
+    animation:driftGlow 18s ease-in-out infinite alternate;
+  }
+  @keyframes driftGlow{
+    0%{ background-position:0% 0%; }
+    100%{ background-position:20% 30%; }
+  }
+  .hero .wheat-lines{
+    position:absolute; inset:0; opacity:.35; mix-blend-mode:screen; pointer-events:none;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, var(--night) 0%, rgba(22,27,46,0.55) 42%, rgba(22,27,46,0.15) 70%);
+  }
+  .hero-inner{
+    position:relative; z-index:2; width:100%;
+    padding:180px 0 96px;
+  }
+  .eyebrow-line{
+    display:flex; align-items:center; gap:10px;
+    color:var(--gold-bright); font-size:13px; letter-spacing:.04em; margin-bottom:26px;
+  }
+  .eyebrow-line .dot{width:6px; height:6px; border-radius:50%; background:var(--gold-bright);}
+  .hero h1{
+    color:var(--wheat); font-size:clamp(42px, 6.2vw, 84px);
+    max-width:900px;
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--gold-bright);
+  }
+  .hero p.lede{
+    color:rgba(244,238,223,0.78); font-size:18px; line-height:1.6;
+    max-width:560px; margin:26px 0 38px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:72px;}
+  .btn-lg{padding:15px 28px; font-size:15px;}
+
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border-top:1px solid var(--line-lt); padding-top:32px;
+  }
+  .hero-stats div{border-left:1px solid var(--line-lt); padding-left:20px;}
+  .hero-stats div:first-child{border-left:none; padding-left:0;}
+  .hero-stats .num{
+    font-family:'Fraunces', serif; font-size:clamp(24px,3vw,36px); color:var(--wheat); font-weight:600;
+  }
+  .hero-stats .label{font-size:13px; color:rgba(244,238,223,0.6); margin-top:4px;}
+  @media (max-width:760px){
+    .hero-stats{grid-template-columns:repeat(2,1fr); row-gap:24px;}
+    .hero-stats div:nth-child(3){border-left:none; padding-left:0;}
+  }
+
+  .scroll-cue{
+    position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+    z-index:2; color:rgba(244,238,223,0.55); font-size:12px;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .scroll-cue .stem{width:1px; height:34px; background:rgba(244,238,223,0.35); position:relative; overflow:hidden;}
+  .scroll-cue .stem::after{
+    content:""; position:absolute; top:-34px; left:0; width:100%; height:100%;
+    background:var(--gold-bright);
+    animation:cueDrop 2.2s ease-in-out infinite;
+  }
+  @keyframes cueDrop{ to{ top:34px; } }
+
+  section{padding:120px 0;}
+  @media (max-width:720px){ section{padding:80px 0;} }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:40px; margin-bottom:56px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(30px,4vw,46px);}
+  .section-head .kicker{color:var(--teal); font-size:14px; font-weight:600; margin-bottom:12px;}
+  .section-head p{max-width:420px; color:rgba(25,21,16,0.62); line-height:1.6; font-size:15.5px;}
+
+  .about{background:var(--wheat);}
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px; align-items:center;
+  }
+  @media (max-width:900px){ .about-grid{grid-template-columns:1fr;} }
+  .about-copy p{font-size:16.5px; line-height:1.75; color:rgba(25,21,16,0.75); margin-bottom:20px;}
+  .about-copy p:first-child{
+    font-family:'Fraunces', serif; font-size:24px; line-height:1.4; color:var(--ink); font-weight:500;
+  }
+  .about-figure{
+    position:relative;
+    border-radius:4px;
+    overflow:hidden;
+    aspect-ratio:4/5;
+    background:linear-gradient(150deg,#2B6E62,#16342E);
+  }
+
+  .about-figure img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .about-figure .tag{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+    background:var(--wheat);
+    padding:14px 18px;
+    font-size:13px;
+    max-width:220px;
+    line-height:1.5;
+    box-shadow:0 10px 30px rgba(0,0,0,0.18);
+  }
+
+  .about-figure .tag strong{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-size:15px;
+    margin-bottom:4px;
+  }
+
+  .departments{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .dept-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:900px){ .dept-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .dept-grid{grid-template-columns:1fr;} }
+  .dept-card{
+    display:block; background:#fff; padding:38px 32px; transition:background .3s ease;
+  }
+  .dept-card:hover{background:var(--wheat);}
+  .dept-card .idx{font-size:13px; color:var(--teal); font-weight:600; margin-bottom:18px;}
+  .dept-card h3{font-size:20px; margin-bottom:10px;}
+  .dept-card p{font-size:14.5px; color:rgba(25,21,16,0.6); line-height:1.6;}
+
+  .programs{background:var(--wheat);}
+  .prog-tabs{display:flex; gap:10px; margin-bottom:36px; flex-wrap:wrap;}
+  .prog-tab{
+    padding:9px 18px; border:1px solid rgba(25,21,16,0.2); border-radius:30px;
+    font-size:13.5px; cursor:pointer; background:transparent;
+  }
+  .prog-tab.active{background:var(--ink); color:var(--wheat); border-color:var(--ink);}
+  .prog-list{border-top:1px solid var(--line);}
+  .prog-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 4px; border-bottom:1px solid var(--line); gap:20px;
+  }
+  .prog-row .name{font-family:'Fraunces',serif; font-size:19px;}
+  .prog-row .meta{display:flex; gap:28px; font-size:13.5px; color:rgba(25,21,16,0.55); flex:none;}
+  @media (max-width:600px){
+    .prog-row{flex-direction:column; align-items:flex-start; gap:8px;}
+  }
+
+  .faculty{background:var(--night); color:var(--wheat);}
+  .faculty .section-head p{color:rgba(244,238,223,0.6);}
+  .faculty .section-head .kicker{color:var(--gold-bright);}
+  .fac-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px;}
+  @media (max-width:900px){ .fac-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .fac-grid{grid-template-columns:1fr;} }
+  
+  .fac-card .avatar{
+    aspect-ratio:1; 
+    border-radius:4px; 
+    margin-bottom:16px;
+    background:linear-gradient(150deg, var(--night-2), #0e1120);
+    border:1px solid var(--line-lt);
+    overflow:hidden;
+  }
+  .fac-card .avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .fac-card h3{font-size:17px; margin-bottom:3px;}
+  .fac-card .role{font-size:13px; color:var(--gold-bright);}
+  .fac-card .dept{font-size:12.5px; color:rgba(244,238,223,0.5); margin-top:6px;}
+
+  .campus{background:#fff;}
+  .campus-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; grid-template-rows:220px 220px; gap:16px;
+  }
+  @media (max-width:800px){ .campus-grid{grid-template-columns:1fr; grid-template-rows:auto;} }
+  .campus-tile{
+    border-radius:4px;
+    overflow:hidden;
+    position:relative;
+    background:linear-gradient(160deg,#c9ad57,#8a6f22);
+  }
+  .campus-tile.tall{
+    grid-row:span 2;
+  }
+  .campus-tile img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    object-position:center;
+  }
+  .campus-tile:nth-child(2){
+    background:linear-gradient(160deg,#3a7d70,#1b3d36);
+  }
+  .campus-tile:nth-child(3){
+    background:linear-gradient(160deg,#1F2740,#0d0f19);
+  }
+  .campus-tile .cap{
+    position:absolute;
+    left:16px;
+    bottom:16px;
+    z-index:2;
+    color:#fff;
+    font-size:14px;
+    background:rgba(0,0,0,0.35);
+    padding:6px 12px;
+    border-radius:20px;
+    backdrop-filter:blur(4px);
+  }
+
+  .campus-facts{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:56px;
+    border-top:1px solid var(--line); padding-top:36px;
+  }
+  @media (max-width:700px){ .campus-facts{grid-template-columns:repeat(2,1fr);} }
+  .campus-facts .num{font-family:'Fraunces',serif; font-size:34px; color:var(--teal);}
+  .campus-facts .label{font-size:13.5px; color:rgba(25,21,16,0.6); margin-top:4px;}
+
+  .student-life{background:var(--wheat-dim);}
+  .life-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  @media (max-width:900px){ .life-grid{grid-template-columns:1fr;} }
+  .life-card{background:#fff; padding:34px 28px; border-radius:4px; border:1px solid var(--line);}
+  .life-card .icon{
+    width:44px; height:44px; border-radius:50%; background:var(--teal); margin-bottom:20px;
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:18px;
+  }
+  .life-card h3{font-size:19px; margin-bottom:10px;}
+  .life-card p{font-size:14.5px; color:rgba(25,21,16,0.62); line-height:1.6;}
+
+  .news{background:#fff; border-top:1px solid var(--line);}
+  .news-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px;}
+  @media (max-width:900px){ .news-grid{grid-template-columns:1fr;} }
+  .news-card .thumb{
+    aspect-ratio:16/10; 
+    border-radius:4px; 
+    margin-bottom:18px;
+    background:linear-gradient(160deg,#e7d9ab,#c89a2e);
+    overflow:hidden;
+  }
+  .news-card .thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .news-card:nth-child(2) .thumb{background:linear-gradient(160deg,#a9c9c1,#2B6E62);}
+  .news-card:nth-child(3) .thumb{background:linear-gradient(160deg,#9aa3c2,#1F2740);}
+  .news-card .date{font-size:12.5px; color:var(--teal); margin-bottom:8px; font-weight:600;}
+  .news-card h3{font-size:19px; margin-bottom:8px; line-height:1.35;}
+  .news-card p{font-size:14px; color:rgba(25,21,16,0.6); line-height:1.6;}
+
+  .cta{
+    background:var(--night); color:var(--wheat); text-align:left;
+    position:relative; overflow:hidden;
+  }
+  .cta::before{
+    content:""; position:absolute; right:-120px; top:-120px; width:420px; height:420px;
+    border-radius:50%; background:radial-gradient(circle, rgba(200,154,46,0.25), transparent 70%);
+  }
+  .cta-inner{position:relative; z-index:1; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:32px;}
+  .cta h2{font-size:clamp(30px,4vw,48px); max-width:560px;}
+  .cta p{color:rgba(244,238,223,0.65); margin-top:14px; max-width:480px; font-size:15.5px;}
+
+  footer{background:#100D08; color:rgba(244,238,223,0.7); padding:70px 0 30px;}
+  .foot-grid{display:grid; grid-template-columns:1.6fr repeat(3,1fr); gap:40px; margin-bottom:56px;}
+  @media (max-width:800px){ .foot-grid{grid-template-columns:repeat(2,1fr);} }
+  footer h4{color:var(--wheat); font-size:13.5px; letter-spacing:.03em; margin-bottom:18px; font-weight:600;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:11px; font-size:14px;}
+  footer li a:hover{color:var(--gold-bright);}
+  footer .foot-brand p{font-size:14px; line-height:1.6; max-width:280px; margin-top:14px; color:rgba(244,238,223,0.55);}
+  .foot-bottom{
+    display:flex; justify-content:space-between; padding-top:26px; border-top:1px solid rgba(244,238,223,0.1);
+    font-size:12.5px; color:rgba(244,238,223,0.4); flex-wrap:wrap; gap:10px;
+  }
+
+  .mobile-menu{
+    position:fixed; inset:0; background:var(--night); z-index:200;
+    display:none; flex-direction:column; padding:28px; gap:2px;
+    transform:translateY(-100%); transition:transform .35s ease;
+  }
+  .mobile-menu.open{display:flex; transform:translateY(0);}
+  .mobile-menu .close-row{display:flex; justify-content:flex-end; margin-bottom:30px;}
+  .mobile-menu .close-row button{background:none; border:none; color:var(--wheat); font-size:26px;}
+  .mobile-menu a{color:var(--wheat); font-size:22px; padding:16px 0; border-bottom:1px solid var(--line-lt); font-family:'Fraunces',serif;}
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="siteNav">
+  <div class="wrap nav-row">
+    <a href="#top" class="brand">
+      <div class="brand-mark">UM</div>
+      <div class="brand-text">
+        <div class="full">University of Mianwali</div>
+        <div class="sub">EST. 2013 &nbsp;·&nbsp; PUNJAB, PAKISTAN</div>
+      </div>
+    </a>
+  
+    <div class="nav-actions">
+      <a href="{% url 'login' %}" class="btn btn-gold"> LMS Login</a>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="close-row"><button id="menuClose">✕</button></div>
+  <a href="#about">About</a>
+  <a href="#departments">Departments</a>
+  <a href="#programs">Programs</a>
+  <a href="#faculty">Faculty</a>
+  <a href="#campus">Campus</a>
+  <a href="#news">News</a>
+  <a href="{% url 'login' %}"> LMS Login</a>
+</div>
+
+<section class="hero" id="top">
+  <video autoplay muted loop playsinline poster="" id="heroVideo">
+    <source src="{% static 'videos/UMW.mp4' %}" type="video/mp4">
+  </video>
+  <div class="fallback-bg"></div>
+  <div class="hero-inner wrap">
+    <div class="eyebrow-line"><span class="dot"></span> FALL 2026 SEMESTER</div>
+    <h1>Where the <em>Thal</em> meets<br>tomorrow's engineers.</h1>
+    <p class="lede">A public university on the edge of the Thal desert, built for students
+      from Mianwali and beyond — rigorous programs, research-driven faculty, and a campus
+      that takes its region seriously.</p>
+    <div class="hero-ctas">
+      <a href="{% url 'departments' %}" class="btn btn-gold btn-lg">Explore Programs</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">6,400+</div><div class="label">Enrolled students</div></div>
+      <div><div class="num">210+</div><div class="label">PhD &amp; senior faculty</div></div>
+      <div><div class="num">38</div><div class="label">Degree programs</div></div>
+      <div><div class="num">13</div><div class="label">Years of teaching</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll<div class="stem"></div></div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <p>University of Mianwali was founded to keep talent in the region it comes from —
+        so students from the Thal and the Indus belt don't have to leave home to get a
+        serious education.</p>
+      <p>Today the university runs undergraduate and graduate programs across engineering,
+        computer science, business, and the humanities, with a teaching model built around
+        small sections, applied labs, and faculty who publish as actively as they teach.</p>
+      <p>Every department is judged on one question: does a graduate leave more capable
+        than when they arrived. That's the standard the campus is built around.</p>
+      <a href="#departments" class="btn btn-outline-dark" style="border-color:rgba(25,21,16,.25); color:var(--ink); margin-top:8px;">See how it's organized ↓</a>
+    </div>
+    <div class="about-figure">
+       <img src="{% static 'images/NewBuilding.jpg' %}" alt="University of Mianwali campus">
+      <div class="tag"><strong>117-acre campus</strong>Purpose-built academic blocks, labs, and residence halls along the Mianwali–Isakhel road.</div>
+    </div>
+  </div>
+</section>
+
+<section class="departments" id="departments">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">HOW THE UNIVERSITY IS ORGANIZED</div>
+        <h2>Six departments, one standard.</h2>
+      </div>
+      <p>Each department sets its own curriculum but answers to the same bar for
+        research output, lab access, and graduate outcomes.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="dept-grid">
+      <a href="departments.html#cs" class="dept-card"><div class="idx">01</div><h3>Computer Science &amp; IT</h3><p>Software engineering, AI/ML, and networks, with a dedicated systems lab and an active LMS built in-house.</p></a>
+      <a href="departments.html#ee" class="dept-card"><div class="idx">02</div><h3>Electrical Engineering</h3><p>Power systems and electronics, with a focus on the region's grid and renewable-energy needs.</p></a>
+      <a href="departments.html#biz" class="dept-card"><div class="idx">03</div><h3>Business &amp; Management</h3><p>Accounting, finance, and entrepreneurship, taught alongside real local business case studies.</p></a>
+      <a href="departments.html#ce" class="dept-card"><div class="idx">04</div><h3>Civil Engineering</h3><p>Structures and water resources — directly relevant to a district shaped by the Indus and the Thal canal system.</p></a>
+      <a href="departments.html#hum" class="dept-card"><div class="idx">05</div><h3>English &amp; Humanities</h3><p>Language, literature, and communication skills that carry across every other degree on campus.</p></a>
+      <a href="departments.html#math" class="dept-card"><div class="idx">06</div><h3>Mathematics &amp; Sciences</h3><p>The foundational department every engineering and CS student passes through in year one.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="programs" id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">DEGREES ON OFFER</div>
+        <h2>Pick a level, then a subject.</h2>
+      </div>
+      <p>Undergraduate, graduate, and doctoral tracks — admissions run on a fixed
+        fall and spring cycle.</p>
+    </div>
+    <div class="prog-tabs">
+      <button class="prog-tab active" data-tab="ug">Undergraduate</button>
+      <button class="prog-tab" data-tab="grad">Graduate</button>
+      <button class="prog-tab" data-tab="phd">PhD</button>
+    </div>
+    <div class="prog-list" id="progList">
+    </div>
+  </div>
+</section>
+
+<section class="faculty" id="faculty">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">WHO TEACHES HERE</div>
+        <h2>Faculty who still publish.</h2>
+      </div>
+      <p>Every department head holds an active research line — not just a title.</p>
+    </div>
+    <div class="fac-grid">
+      <div class="fac-card"><div class="avatar">
+        <img src="{%static 'images/vice.jpg'%}" alt="Dr. Sana Iqbal">
+      </div><h3>Dr. Sana Iqbal</h3><div class="role">Chairperson</div><div class="dept">Computer Science &amp; IT</div>
+    </div>
+      <div class="fac-card"><div class="avatar">
+        <img src="{%static 'images/2.jpeg'%}" alt="Dr. Faisal Aslam">
+      </div><h3>Dr. Faisal Aslam</h3><div class="role">Associate Professor</div><div class="dept">Electrical Engineering</div></div>
+      <div class="fac-card"><div class="avatar">
+        <img src="{%static 'images/citations.jpg'%}" alt="Dr. Ayesha Noor">
+      </div><h3>Dr. Ayesha Noor</h3><div class="role">Assistant Professor</div><div class="dept">Business &amp; Management</div></div>
+      <div class="fac-card"><div class="avatar">
+        <img src="{%static 'images/image.png'%}" alt="Dr. Tariq Mehmood">
+      </div><h3>Dr. Tariq Mehmood</h3><div class="role">Professor</div><div class="dept">Civil Engineering</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="campus" id="campus">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">LIFE ON CAMPUS</div>
+        <h2>117 acres, built for daily use.</h2>
+      </div>
+      <p>Academic blocks, residence halls, a central library, and sports grounds —
+        all within walking distance of each other.</p>
+    </div>
+    <div class="campus-grid">
+      <div class="campus-tile tall"><div class="cap">Main academic block</div>
+    <img src="{%static 'images/Main.jpg'%}" alt=""></div>
+      <div class="campus-tile"><div class="cap">Central library</div>
+    <img src="{%static 'images/Library.webp'%}" alt=""></div>
+      <div class="campus-tile"><div class="cap">Computer Science Building</div>
+    <img src="{%static 'images/Cs.jpg'%}" alt=""></div>
+    </div>
+    <div class="campus-facts">
+      <div><div class="num">117</div><div class="label">Acres of campus</div></div>
+      <div><div class="num">4</div><div class="label">Residence halls</div></div>
+      <div><div class="num">30+</div><div class="label">Student societies</div></div>
+      <div><div class="num">1</div><div class="label">Central library, 24/6</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="student-life">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">OUTSIDE THE CLASSROOM</div>
+        <h2>What students actually do here.</h2>
+      </div>
+    </div>
+    <div class="life-grid">
+      <div class="life-card"><div class="icon">◆</div><h3>Societies &amp; clubs</h3><p>Debating, coding, and entrepreneurship societies run their own events calendar each semester.</p></div>
+      <div class="life-card"><div class="icon">◆</div><h3>Sports grounds</h3><p>Cricket, football, and an indoor hall — inter-department tournaments run every spring.</p></div>
+      <div class="life-card"><div class="icon">◆</div><h3>Career office</h3><p>Internship placement and interview prep, working directly with employers in Punjab.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="news" id="news">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">FROM CAMPUS</div>
+        <h2>News &amp; events.</h2>
+      </div>
+    </div>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="thumb">
+          <img src="{% static 'images/admission.png' %}" alt="Fall 2026 admissions">
+        </div>
+        <div class="date">SEP 2026</div>
+        <h3>Fall 2026 admissions now open</h3>
+        <p>
+          Applications for undergraduate and graduate programs close on October 15.
+        </p>
+      </div>
+      <div class="news-card">
+        <div class="thumb">
+          <img src="{% static 'images/lab.png' %}" alt="Systems and AI Lab">
+        </div>
+        <div class="date">AUG 2026</div>
+        <h3>New Systems &amp; AI Lab opens in the CS block</h3>
+        <p>
+          The department's new lab adds GPU workstations for final-year and research students.
+        </p>
+      </div>
+      <div class="news-card">
+        <div class="thumb">
+          <img src="{% static 'images/sports.jpg' %}" alt="University sports gala">
+        </div>
+        <div class="date">AUG 2026</div>
+        <h3>Annual sports gala scheduled for October</h3>
+        <p>
+          Inter-department cricket and football fixtures return this term.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap cta-inner">
+    <div>
+      <h2>Everything for your semester, in one login.</h2>
+      <p>Coursework, assignments, results, and fee status — all through the student portal.</p>
+    </div>
+    <div style="display:flex; gap:16px; flex-wrap:wrap;">
+      <a href="{% url 'login' %}" class="btn btn-gold btn-lg">Student Portal Login</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="full" style="font-family:'Fraunces',serif; font-size:19px; color:var(--wheat);">University of Mianwali</div>
+        <p>A public university serving Mianwali district and the wider Thal region since 2013.</p>
+      </div>
+      <div>
+        <h4>ACADEMICS</h4>
+        <ul>
+          <li><a href="#departments">Departments</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#faculty">Faculty</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CAMPUS</h4>
+        <ul>
+          <li><a href="#campus">Campus life</a></li>
+          <li><a href="#news">News &amp; events</a></li>
+          <li><a href="{% url 'departments' %}">Departments</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>PORTAL</h4>
+        <ul>
+          <li><a href="{% url 'login' %}">Student Portal Login</a></li>
+          <li><a href="#">LMS help center</a></li>
+          <li><a href="#">Contact registrar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 University of Mianwali. All rights reserved.</span>
+      <span>Mianwali–Isakhel Road, Mianwali, Punjab, Pakistan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('menuClose');
+  menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+  menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+  const heroVideo = document.getElementById('heroVideo');
+  const fallback = document.querySelector('.fallback-bg');
+  heroVideo.addEventListener('loadeddata', () => { fallback.style.opacity = '0'; });
+  heroVideo.addEventListener('error', () => { heroVideo.style.display = 'none'; });
+  const programs = {
+    ug: [
+      { name:'BS Computer Science', dept:'Computer Science & IT', duration:'4 years', seats:'120 seats/year' },
+      { name:'BS Software Engineering', dept:'Computer Science & IT', duration:'4 years', seats:'80 seats/year' },
+      { name:'BSc Electrical Engineering', dept:'Electrical Engineering', duration:'4 years', seats:'100 seats/year' },
+      { name:'BBA', dept:'Business & Management', duration:'4 years', seats:'90 seats/year' },
+      { name:'BSc Civil Engineering', dept:'Civil Engineering', duration:'4 years', seats:'80 seats/year' },
+    ],
+    grad: [
+      { name:'MS Computer Science', dept:'Computer Science & IT', duration:'2 years', seats:'40 seats/year' },
+      { name:'MS Data Science', dept:'Computer Science & IT', duration:'2 years', seats:'30 seats/year' },
+      { name:'MBA', dept:'Business & Management', duration:'2 years', seats:'50 seats/year' },
+      { name:'MSc Electrical Engineering', dept:'Electrical Engineering', duration:'2 years', seats:'25 seats/year' },
+    ],
+    phd: [
+      { name:'PhD Computer Science', dept:'Computer Science & IT', duration:'3–5 years', seats:'8 seats/year' },
+      { name:'PhD Electrical Engineering', dept:'Electrical Engineering', duration:'3–5 years', seats:'6 seats/year' },
+      { name:'PhD Management Sciences', dept:'Business & Management', duration:'3–5 years', seats:'5 seats/year' },
+    ]
+  };
+  const progList = document.getElementById('progList');
+  function renderPrograms(tab){
+    progList.innerHTML = programs[tab].map(p => `
+      <div class="prog-row">
+        <div class="name">${p.name}</div>
+        <div class="meta">
+          <span>${p.dept}</span>
+          <span>${p.duration}</span>
+          <span>${p.seats}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+  renderPrograms('ug');
+  document.querySelectorAll('.prog-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.prog-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderPrograms(btn.dataset.tab);
+    });
+  });
+</script>
+</body>
+</html>

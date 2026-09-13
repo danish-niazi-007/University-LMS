@@ -10,6 +10,7 @@ urlpatterns = [
         "admin/",
         admin.site.urls,
     ),
+    path("",include("apps.website.urls")),
 
     path(
         "",
