@@ -377,7 +377,7 @@ This starts the Django app alongside a PostgreSQL container, using the same `.en
 ## Author
 
 **Danish Hassan**
-Computer Science graduate, University of Sargodha
+Computer Science graduate, University of Mianwali
 
 - GitHub: [github.com/danish-niazi-007](https://github.com/danish-niazi-007)
 - LinkedIn: [linkedin.com/in/danish-hassan-dev](https://linkedin.com/in/danish-hassan-dev)
