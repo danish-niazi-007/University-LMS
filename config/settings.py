@@ -89,10 +89,10 @@ import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'ENPhBLwiN3QI9OFS',  
-        'HOST': 'db.lwuansjmdcsmqaxmrsph.supabase.co',
+        'NAME': 'neondb',
+        'USER': 'neondb_owner',
+        'PASSWORD': 'npg_qv0KoJn5wIUQ',
+        'HOST': 'ep-soft-star-aexw85td-pooler.c-2.us-east-2.aws.neon.tech',
         'PORT': '5432',
     }
 }
