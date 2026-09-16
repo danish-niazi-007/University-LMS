@@ -9,15 +9,29 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![License](https://img.shields.io/badge/license-Portfolio-E3B948?style=flat-square)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Project-success?style=flat-square&logo=vercel&logoColor=white)](https://university-lms-khaki.vercel.app/)
 
 Students, teachers, and the HOD each get their own dashboard, backed by one shared academic data model — departments, courses, offerings, enrollments, attendance, marks, and assignments.
+
+**🔗 [Live Demo — university-lms-khaki.vercel.app](https://university-lms-khaki.vercel.app/)**
 
 </div>
 
 ---
 
+## 🚀 Live Demo
+
+The project is deployed and live — click below to open it and explore the landing page, departments page, and login flow yourself:
+
+**👉 [https://university-lms-khaki.vercel.app/](https://university-lms-khaki.vercel.app/)**
+
+> **Note:** Role-based login credentials (HOD / Teacher / Student demo accounts) will be added here shortly so anyone visiting can log in and try out all three dashboards. Check back soon — this section will be updated with the test account details.
+
+---
+
 ## Table of Contents
 
+- [Live Demo](#-live-demo)
 - [Overview](#overview)
 - [Why This Project](#why-this-project)
 - [Who Does What](#who-does-what)
